@@ -11,3 +11,9 @@
 *.lai
 *.la
 *.a
+
+# Code::Blocks shit
+bin/
+obj/
+*.depend
+*.layout
