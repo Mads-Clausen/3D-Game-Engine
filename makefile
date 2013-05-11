@@ -1,5 +1,5 @@
 EXE     = engine
-LIBS    = -lglfw -lGLEW	-lGL
+LIBS    = -lglfw -lGLEW	-lGL -L./depend -lSOIL
 SOURCE  = src/*.cpp src/math/*.cpp src/scene/*.cpp
 INCLUDE = -I./include/
 

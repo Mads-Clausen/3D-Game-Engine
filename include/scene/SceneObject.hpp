@@ -8,6 +8,12 @@
  * Copyright (c) Mads Clausen :: All Rights Reserved
  ******************************************************************/
 
+/**
+ * @file Contains the definition of the SceneObject class.
+ *
+ * @author Mads Clausen
+ */
+
 
 #ifndef SCENEOBJECT_INCLUDED
 #define SCENEOBJECT_INCLUDED
@@ -16,9 +22,9 @@
 
 class Scene;
 
-/**
+/*****************************************************************
  * A dynamic object which can be added to any Scene instance.
- */
+ *****************************************************************/
 class SceneObject
 {
     private:
@@ -26,9 +32,19 @@ class SceneObject
         Scene *_parent;
 
     public:
+        /*****************
+         * Constructor.
+         *****************/
         SceneObject(Scene *p) : _parent(p) {}
 
+        /************************
+         * Updates everything.
+         ************************/
         virtual void update();
+
+        /**********************************************
+         * Pushes needed stuff onto the renderqueue.
+         **********************************************/
         virtual void render();
 };
 
