@@ -1,12 +1,13 @@
 /******************************************************************
  * <insert name>   :    Game Engine produced by Mads Clausen
- * www             :    http://www.ckef-worx.com
+ * www             :    http://anickyan.koding.com/ge
  *
  * Game engine using OpenGL 3.2 for hardware-accelerated
  * graphics, for the best performance.
  *
  * Copyright (c) Mads Clausen :: All Rights Reserved
  ******************************************************************/
+
 
 #ifndef SCENEOBJECT_INCLUDED
 #define SCENEOBJECT_INCLUDED
@@ -15,6 +16,9 @@
 
 class Scene;
 
+/**
+ * A dynamic object which can be added to any Scene instance.
+ */
 class SceneObject
 {
     private:

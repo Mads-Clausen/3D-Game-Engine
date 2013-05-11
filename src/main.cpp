@@ -1,6 +1,6 @@
 /******************************************************************
  * <insert name>   :    Game Engine produced by Mads Clausen
- * www             :    http://www.ckef-worx.com
+ * www             :    http://anickyan.koding.com/ge
  *
  * Game engine using OpenGL 3.2 for hardware-accelerated
  * graphics, for the best performance.
@@ -22,7 +22,7 @@ int main()
     if(!setup::initOpenGL())
         return -1;
 
-    if(!setup::openWindow("Some title", 800, 600))
+    if(!setup::openWindow("2D Game Engine", 800, 600))
         return -1;
 
     mat3f m(
