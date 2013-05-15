@@ -15,6 +15,16 @@ class Shader
         GLuint _id;
 
     public:
+        /************************
+         * Default constructor.
+         ************************/
+        Shader()
+        {
+            _vsPath = (char*) "";
+            _fsPath = (char*) "";
+            _id = 0;
+        }
+
         /****************************************************
          * Constructor.
          *
