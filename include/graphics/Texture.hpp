@@ -18,6 +18,7 @@
 #define TEXTURE_INCLUDED
 
 #include <vector>
+#include <iostream>
 
 #include <GL/glew.h>
 #include "GL/SOIL.h"
@@ -28,6 +29,7 @@ class Texture
 {
     private:
         std::vector<GLfloat> _uvCoords;
+        GLuint _buf, _tex;
 
     public:
         /****************************
@@ -67,6 +69,31 @@ class Texture
          * @param v The coordinate-set.
          ***************************************/
         void addUVCoordinate(vec2<GLfloat> v);
+
+
+        /*********************************
+         * Updates the UV coord buffer.
+         *********************************/
+        void updateBuffer();
+
+
+        /**********************************************************
+         * Load the texture into memory. Image width and height
+         * must be a power of 2.
+         *
+         * @param path The path to the image file.
+         *
+         * @return Success?
+         **********************************************************/
+        bool load(const char *path);
+
+
+        /**
+         * Pushes the UV coordinates.
+         *
+         * @param pID the uniform location.
+         */
+        void push(GLuint loc);
 };
 
 

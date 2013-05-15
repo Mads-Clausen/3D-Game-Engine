@@ -32,19 +32,28 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/GL/SOIL.h" />
 		<Unit filename="include/GL/glcorearb.h" />
+		<Unit filename="include/graphics/Shader.hpp" />
+		<Unit filename="include/graphics/Texture.hpp" />
 		<Unit filename="include/math/mat2.hpp" />
 		<Unit filename="include/math/mat3.hpp" />
 		<Unit filename="include/math/vec2.hpp" />
 		<Unit filename="include/math/vec3.hpp" />
 		<Unit filename="include/math/vec4.hpp" />
+		<Unit filename="include/scene/Scene.hpp" />
+		<Unit filename="include/scene/SceneObject.hpp" />
 		<Unit filename="include/setup.hpp" />
+		<Unit filename="src/graphics/Shader.cpp" />
+		<Unit filename="src/graphics/Texture.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/math/mat2.cpp" />
 		<Unit filename="src/math/mat3.cpp" />
 		<Unit filename="src/math/vec2.cpp" />
 		<Unit filename="src/math/vec3.cpp" />
 		<Unit filename="src/math/vec4.cpp" />
+		<Unit filename="src/scene/Scene.cpp" />
+		<Unit filename="src/scene/SceneObject.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

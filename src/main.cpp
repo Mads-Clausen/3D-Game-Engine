@@ -14,8 +14,8 @@
 
 #include "math/vec3.hpp"
 #include "math/mat3.hpp"
-
 #include "setup.hpp"
+#include "graphics/Shader.hpp"
 
 int main()
 {
@@ -26,9 +26,13 @@ int main()
         return -1;
 
     mat3f m(
-            0.0f,  1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-           -1.0f, -1.0f, -1.0f);
+            0.0f,  0.5f, -1.0f,
+            0.5f, -0.5f, -1.0f,
+           -0.5f, -0.5f, -1.0f);
+
+    Shader shader("", "");
+    shader.compile("#version 330\nlayout(location = 0) in vec3 vertexPosition_modelspace;\nvoid main() { gl_Position.xyz = vertexPosition_modelspace;gl_Position.w = 1.0; }",
+                   "#version 330 core\nout vec3 color;\nvoid main(){ color = vec3(1, 0, 0); }");
 
     GLuint vertexbuffer;
     glGenBuffers(1, &vertexbuffer);
@@ -37,6 +41,7 @@ int main()
 
     do
     {
+        shader.bind();
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
@@ -51,6 +56,7 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         glDisableVertexAttribArray(0);
+        shader.unbind();
 
         glfwSwapBuffers();
     } while(glfwGetKey(GLFW_KEY_ESC) != GLFW_PRESS && glfwGetWindowParam(GLFW_OPENED));
