@@ -23,19 +23,27 @@ int main()
     if(!setup::initOpenGL())
         return -1;
 
-    if(!setup::openWindow("Testing", 800, 600))
+    if(!setup::openWindow("Testing", 600, 600))
         return -1;
 
     GLfloat vertices[] =
     {
-        0.0f,  0.5f, -1.0f,
-        0.5f, -0.5f, -1.0f,
-       -0.5f, -0.5f, -1.0f
+        -1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+         1.0f, -1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f
     };
 
-    GLfloat UV[] =
+    std::vector<GLfloat> UV =
     {
-        0.5f, 0.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        0.0f, 1.0f,
+
+        1.0f, 0.0f,
         1.0f, 1.0f,
         0.0f, 1.0f
     };
@@ -49,12 +57,17 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+    /*
     GLuint texbuffer;
     glGenBuffers(1, &texbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, texbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(UV), UV, GL_STATIC_DRAW);
+    */
 
+    Texture tex(UV);
+    tex.load("test.jpg");
 
+    /*
     GLuint _tex = SOIL_load_OGL_texture("test.jpg", 0, SOIL_CREATE_NEW_ID,
 				SOIL_FLAG_TEXTURE_REPEATS |
 				SOIL_FLAG_INVERT_Y |
@@ -67,6 +80,7 @@ int main()
     glBindTexture(GL_TEXTURE_2D, _tex);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    */
 
     do
     {
@@ -74,22 +88,15 @@ int main()
 
         shader.bind();
         glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        glBindBuffer(GL_ARRAY_BUFFER, texbuffer);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _tex);
-        glUniform1i(glGetUniformLocation(shader.getID(), "tex_sampler"), 0);
-
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        tex.push(1, glGetUniformLocation(shader.getID(), "tex_sampler"));
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        tex.pop();
 
         glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
 
         shader.unbind();
 
