@@ -29,7 +29,7 @@ class Texture
 {
     private:
         std::vector<GLfloat> _uvCoords;
-        GLuint _buf, _tex;
+        GLuint _buf, _tex, __last_loc;
 
     public:
         /****************************
@@ -91,9 +91,16 @@ class Texture
         /**
          * Pushes the UV coordinates.
          *
-         * @param pID the uniform location.
+         * @param loc The layout location.
+         * @param uniform_loc The uniform location.
          */
-        void push(GLuint loc);
+        void push(GLuint loc, GLuint uniform_loc);
+
+
+        /*******************************************************************
+         * Makes sure that the texture is not used in any other shaders.
+         *******************************************************************/
+        void pop();
 };
 
 

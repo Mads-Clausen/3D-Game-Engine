@@ -59,10 +59,24 @@ bool Texture::load(const char *path)
         return false;
     }
 
+    std::cout << "_tex = " << _tex << std::endl;
+
     return true;
 }
 
-void Texture::push(GLuint loc)
+void Texture::push(GLuint loc, GLuint uniform_loc)
 {
+    __last_loc = loc;
+    glBindBuffer(GL_ARRAY_BUFFER, _buf);
+    glEnableVertexAttribArray(loc);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
+    glActiveTexture(GL_TEXTURE0);
+    glUniform1i(uniform_loc, 0);
+    glBindTexture(GL_TEXTURE_2D, _tex);
+}
+
+void Texture::pop()
+{
+    glDisableVertexAttribArray(__last_loc);
 }
