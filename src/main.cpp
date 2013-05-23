@@ -55,7 +55,12 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(UV), UV, GL_STATIC_DRAW);
 
 
-    GLuint _tex = SOIL_load_OGL_texture("test.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MIPMAPS);
+    GLuint _tex = SOIL_load_OGL_texture("test.jpg", 0, SOIL_CREATE_NEW_ID,
+				SOIL_FLAG_TEXTURE_REPEATS |
+				SOIL_FLAG_INVERT_Y |
+				SOIL_FLAG_COMPRESS_TO_DXT |
+				SOIL_FLAG_NTSC_SAFE_RGB);
+
 
     std::cout << "tex = " << _tex << std::endl;
 

@@ -73,8 +73,6 @@ namespace setup
         glGenVertexArrays(1, &vertex_arr_id);
         glBindVertexArray(vertex_arr_id);
 
-        glEnable(GL_TEXTURE_2D);
-
         return true;
     }
 
