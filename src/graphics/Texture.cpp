@@ -49,11 +49,10 @@ void Texture::updateBuffer()
 bool Texture::load(const char *path)
 {
     if(_tex == 0)
-        _tex = SOIL_load_OGL_texture(path, 0, SOIL_CREATE_NEW_ID,
-                                                            SOIL_FLAG_TEXTURE_REPEATS |
-                                                            SOIL_FLAG_INVERT_Y |
-                                                            SOIL_FLAG_COMPRESS_TO_DXT |
-                                                            SOIL_FLAG_NTSC_SAFE_RGB);
+        _tex = SOIL_load_OGL_texture(path, 0, SOIL_CREATE_NEW_ID,   SOIL_FLAG_TEXTURE_REPEATS |
+                                                                    SOIL_FLAG_INVERT_Y |
+                                                                    SOIL_FLAG_COMPRESS_TO_DXT |
+                                                                    SOIL_FLAG_NTSC_SAFE_RGB);
     else
         _tex = SOIL_load_OGL_texture(path, 0, _tex, SOIL_FLAG_TEXTURE_REPEATS |
                                                     SOIL_FLAG_INVERT_Y |
@@ -76,7 +75,7 @@ void Texture::push(GLuint loc, GLuint uniform_loc)
     __last_loc = loc;
     glBindBuffer(GL_ARRAY_BUFFER, _buf);
     glEnableVertexAttribArray(loc);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+    glVertexAttribPointer(loc, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
     glActiveTexture(GL_TEXTURE0);
     glUniform1i(uniform_loc, 0);

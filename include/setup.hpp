@@ -55,7 +55,7 @@ namespace setup
     {
         if(!glfwOpenWindow(w, h, 0,0,0,0, 32,0, GLFW_WINDOW))
         {
-            std::cerr << "Failed to open GLFW window." << std::endl;;
+            std::cerr << "Failed to open GLFW window." << std::endl;
             glfwTerminate();
             return false;
         }

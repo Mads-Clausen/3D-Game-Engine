@@ -57,47 +57,24 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    /*
-    GLuint texbuffer;
-    glGenBuffers(1, &texbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, texbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(UV), UV, GL_STATIC_DRAW);
-    */
-
     Texture tex(UV);
     tex.load("test.jpg");
-
-    /*
-    GLuint _tex = SOIL_load_OGL_texture("test.jpg", 0, SOIL_CREATE_NEW_ID,
-				SOIL_FLAG_TEXTURE_REPEATS |
-				SOIL_FLAG_INVERT_Y |
-				SOIL_FLAG_COMPRESS_TO_DXT |
-				SOIL_FLAG_NTSC_SAFE_RGB);
-
-
-    std::cout << "tex = " << _tex << std::endl;
-
-    glBindTexture(GL_TEXTURE_2D, _tex);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    */
 
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader.bind();
-        glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(0);
 
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        tex.push(1, glGetUniformLocation(shader.getID(), "tex_sampler"));
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        tex.pop();
+            tex.push(1, glGetUniformLocation(shader.getID(), "tex_sampler"));
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            tex.pop();
 
-        glDisableVertexAttribArray(0);
-
+            glDisableVertexAttribArray(0);
         shader.unbind();
 
         glfwSwapBuffers();
