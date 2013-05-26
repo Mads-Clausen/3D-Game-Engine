@@ -69,10 +69,6 @@ namespace setup
             return false;
         }
 
-        GLuint vertex_arr_id;
-        glGenVertexArrays(1, &vertex_arr_id);
-        glBindVertexArray(vertex_arr_id);
-
         return true;
     }
 
