@@ -8,12 +8,14 @@
  * Copyright (c) Mads Clausen :: All Rights Reserved
  ******************************************************************/
 
-#include "graphics/Texture.hpp"
+#include "hardware/Texture.hpp"
 
 Texture::Texture(std::vector<GLfloat> c)
 {
     _uvCoords = c;
     updateBuffer();
+
+    _tex = 0;
 }
 
 Texture::Texture(GLfloat *c, unsigned int n)
@@ -24,6 +26,7 @@ Texture::Texture(GLfloat *c, unsigned int n)
     }
 
     updateBuffer();
+    _tex = 0;
 }
 
 void Texture::addUVCoordinate(GLfloat x, GLfloat y)
@@ -65,8 +68,6 @@ bool Texture::load(const char *path)
         return false;
     }
 
-    std::cout << "_tex = " << _tex << std::endl;
-
     return true;
 }
 
@@ -78,8 +79,10 @@ void Texture::push(GLuint loc, GLuint uniform_loc)
     glVertexAttribPointer(loc, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
     glActiveTexture(GL_TEXTURE0);
-    glUniform1i(uniform_loc, 0);
     glBindTexture(GL_TEXTURE_2D, _tex);
+    glUniform1i(uniform_loc, 0);
+
+    std::cout << "\nglBindBuffer(GL_ARRAY_BUFFER, " << _buf << ");\nglEnableVertexAttribArray(" << loc << ");\nglVertexAttribPointer(" << loc << ", 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);\nglActiveTexture(GL_TEXTURE0);\nglBindTexture(GL_TEXTURE_2D, " << _tex << ");\nglUniform1i(" << uniform_loc << ", 0);\n" << std::endl;
 }
 
 void Texture::pop()

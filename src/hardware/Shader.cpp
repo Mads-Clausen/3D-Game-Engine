@@ -1,4 +1,4 @@
-#include "graphics/Shader.hpp"
+#include "hardware/Shader.hpp"
 
 void Shader::compile()
 {
@@ -75,6 +75,8 @@ void Shader::compile()
     glDeleteShader(vertShaderID);
     glDeleteShader(fragShaderID);
 
+    std::cout << "Compiled shader with ID #" << progID << std::endl;
+
     _id = progID;
 }
 
@@ -126,5 +128,6 @@ void Shader::compile(const char *vertSourcePointer, const char *fragSourcePointe
     glDeleteShader(vertShaderID);
     glDeleteShader(fragShaderID);
 
+    std::cout << "Compiled shader with ID #" << progID << std::endl;
     _id = progID;
 }

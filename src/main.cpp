@@ -13,9 +13,9 @@
 #include "math/vec3.hpp"
 #include "math/mat3.hpp"
 #include "setup.hpp"
-#include "graphics/Shader.hpp"
-#include "graphics/Texture.hpp"
-#include "graphics/RenderQueue.hpp"
+#include "hardware/Shader.hpp"
+#include "hardware/Texture.hpp"
+#include "hardware/RenderQueue.hpp"
 
 int main()
 {
@@ -54,7 +54,7 @@ int main()
     Texture tex(UV);
     tex.load("test.jpg");
 
-
+    /*
     GLuint vertex_arr_id;
     glGenVertexArrays(1, &vertex_arr_id);
 
@@ -65,26 +65,34 @@ int main()
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
         shader.bind();
-        glEnableVertexAttribArray(0);
 
+        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         tex.push(1, glGetUniformLocation(shader.getID(), "tex_sampler"));
     glBindVertexArray(0);
+    */
 
     RenderQueue queue;
 
+    Mesh m(vertices, 6);
+
     RenderObject ro;
-    ro.length = 6;
-    ro.bufferStart = 0;
-    ro.vao = vertex_arr_id;
+        ro.bufferStart = 0;
+        ro.length = 6;
+        ro.mesh = &m;
+        ro.shader = &shader;
+        ro.tex = &tex;
+
+    ro.constructVAO();
+
+    queue.push(&ro);
 
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        queue.push(&ro);
         queue.render();
 
         glfwSwapBuffers();

@@ -1,7 +1,23 @@
+/******************************************************************
+ * <insert name>   :    Game Engine produced by Mads Clausen
+ * www             :    http://anickyan.koding.com/ge
+ *
+ * Game engine using OpenGL 3.2 for hardware-accelerated
+ * graphics, for the best performance.
+ *
+ * Copyright (c) Mads Clausen :: All Rights Reserved
+ ******************************************************************/
+
+/**
+ * @file Contains definition of the Shader class.
+ * @author Mads Clausen
+ */
+
 #ifndef SHADER_INCLUDED
 #define SHADER_INCLUDED
 
 #include <string>
+#include <iostream>
 #include <fstream>
 #include <vector>
 #include <cmath>

@@ -10,7 +10,6 @@
 
 /***********************************************************
  * @file Contains the definition of the Texture class.
- *
  * @author Mads Clausen
  ***********************************************************/
 
@@ -88,12 +87,12 @@ class Texture
         bool load(const char *path);
 
 
-        /**
+        /***********************************************
          * Pushes the UV coordinates.
          *
          * @param loc The layout location.
          * @param uniform_loc The uniform location.
-         */
+         ***********************************************/
         void push(GLuint loc, GLuint uniform_loc);
 
 
@@ -101,6 +100,17 @@ class Texture
          * Makes sure that the texture is not used in any other shaders.
          *******************************************************************/
         void pop();
+
+
+        /*****************************
+         * Gets the texture ID.
+         *
+         * @return The texture ID.
+         *****************************/
+        GLuint &getID()
+        {
+            return _tex;
+        }
 };
 
 
