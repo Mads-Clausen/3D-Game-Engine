@@ -22,11 +22,13 @@
 #include <GL/glew.h>
 #include "GL/SOIL.h"
 
+#include "hardware/Shader.hpp"
 #include "math/vec2.hpp"
 
 class Texture
 {
     private:
+        GLuint _uniformLoc, _vaLoc;
         std::vector<GLfloat> _uvCoords;
         GLuint _buf, _tex, __last_loc;
 
@@ -88,12 +90,9 @@ class Texture
 
 
         /***********************************************
-         * Pushes the UV coordinates.
-         *
-         * @param loc The layout location.
-         * @param uniform_loc The uniform location.
+         * Pushes the UV coordinates and the sampler.
          ***********************************************/
-        void push(GLuint loc, GLuint uniform_loc);
+        void push();
 
 
         /*******************************************************************
@@ -110,6 +109,51 @@ class Texture
         GLuint &getID()
         {
             return _tex;
+        }
+
+
+        /************************************************************
+         * Sets the uniform location
+         *
+         * @param shader The shader which contains the location.
+         * @param name The name of the location in the shader.
+         ************************************************************/
+        void setUniformLocation(Shader *shader, const char *name)
+        {
+            _uniformLoc = glGetUniformLocation(shader->getID(), name);
+        }
+
+
+        /**********************************************
+         * Sets the vertex attrib pointer location.
+         *
+         * @param loc The location.
+         **********************************************/
+        void setVertexAttribLocation(GLuint loc)
+        {
+            _vaLoc = loc;
+        }
+
+
+        /**********************************************
+         * Gets the vertex attrib pointer location.
+         *
+         * @return The location.
+         **********************************************/
+        GLuint getVertexAttribLocation()
+        {
+            return _vaLoc;
+        }
+
+
+        /************************************
+         * Gets the uniform location.
+         *
+         * @return The uniform location.
+         ************************************/
+        GLuint getUniformLocation()
+        {
+            return _uniformLoc;
         }
 };
 

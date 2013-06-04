@@ -36,6 +36,34 @@ int main()
         -1.0f,  1.0f, -1.0f
     };
 
+    Shader shader;
+    shader.compile("\
+#version 330 core                                           \n\
+layout(location = 0) in vec3 vertexPosition_modelspace;     \
+layout(location = 1) in vec2 vertexUV;                      \
+                                                            \
+out vec2 UV;                                                \
+                                                            \
+void main()                                                 \
+{                                                           \
+    gl_Position.xyz = vertexPosition_modelspace;            \
+    gl_Position.w = 1.0;                                    \
+    UV = vertexUV;                                          \
+}",
+//////////////////////////////////////////////////////////////////////////////////////////
+"\
+#version 330 core                                           \n\
+out vec3 color;                                             \
+                                                            \
+in vec2 UV;                                                 \
+uniform sampler2D tex_sampler;                              \
+void main()                                                 \
+{                                                           \
+    color = texture(tex_sampler, UV).rgb;                   \
+}");
+
+    Mesh mesh(vertices, 6);
+
     std::vector<GLfloat> UV =
     {
         0.0f, 0.0f,
@@ -47,46 +75,22 @@ int main()
         0.0f, 1.0f
     };
 
-    Shader shader;
-    shader.compile("#version 330 core\nlayout(location = 0) in vec3 vertexPosition_modelspace;\nlayout(location = 1) in vec2 vertexUV;\nout vec2 UV;\nvoid main() { gl_Position.xyz = vertexPosition_modelspace;gl_Position.w = 1.0;\nUV = vertexUV; }",
-                   "#version 330 core\nout vec3 color;\nin vec2 UV;\nuniform sampler2D tex_sampler;\nvoid main() { color = texture(tex_sampler, UV).rgb; }");
-
     Texture tex(UV);
     tex.load("test.jpg");
+    tex.setVertexAttribLocation(1);
+    tex.setUniformLocation(&shader, "tex_sampler");
 
-    /*
-    GLuint vertex_arr_id;
-    glGenVertexArrays(1, &vertex_arr_id);
-
-    glBindVertexArray(vertex_arr_id);
-        GLuint vertexbuffer;
-        glGenBuffers(1, &vertexbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        shader.bind();
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        tex.push(1, glGetUniformLocation(shader.getID(), "tex_sampler"));
-    glBindVertexArray(0);
-    */
-
-    RenderQueue queue;
-
-    Mesh m(vertices, 6);
-
+    glGetError();
     RenderObject ro;
         ro.bufferStart = 0;
         ro.length = 6;
-        ro.mesh = &m;
+        ro.mesh = &mesh;
         ro.shader = &shader;
-        ro.tex = &tex;
+        ro.addTexture(&tex);
 
     ro.constructVAO();
 
+    RenderQueue queue;
     queue.push(&ro);
 
     do

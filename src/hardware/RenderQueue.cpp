@@ -84,9 +84,11 @@ RenderObject::RenderObject()
 void RenderObject::constructVAO()
 {
     glBindVertexArray(__vao);
-        mesh->constructVAO(__vao, false);
         shader->bind();
-        tex->push(1, glGetUniformLocation(shader->getID(), "tex_sampler"));
+        mesh->constructVAO(__vao, false);
+
+        for(unsigned int i = 0; i < textures.size(); ++i)
+            textures[i]->push();
     glBindVertexArray(0);
 }
 

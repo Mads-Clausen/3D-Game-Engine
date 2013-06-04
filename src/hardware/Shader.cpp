@@ -33,7 +33,6 @@ void Shader::compile()
     GLint Result = GL_FALSE;
     int infoLogLen;
 
-    printf("Compiling shader : %s\n", _vsPath);
     char const *vertSourcePointer = vertShaderCode.c_str();
     glShaderSource(vertShaderID, 1, &vertSourcePointer , NULL);
     glCompileShader(vertShaderID);
@@ -46,7 +45,6 @@ void Shader::compile()
     fprintf(stdout, "%s\n", &vertShaderErrMsgs[0]);
 
     // Compile Fragment Shader
-    printf("Compiling shader : %s\n", _vsPath);
     char const *fragSourcePointer = fragShaderCode.c_str();
     glShaderSource(fragShaderID, 1, &fragSourcePointer , NULL);
     glCompileShader(fragShaderID);
@@ -59,7 +57,6 @@ void Shader::compile()
     fprintf(stdout, "%s\n", &fragShaderErrMsgs[0]);
 
     // Link the program
-    fprintf(stdout, "Linking program\n");
     GLuint progID = glCreateProgram();
     glAttachShader(progID, vertShaderID);
     glAttachShader(progID, fragShaderID);
@@ -74,8 +71,6 @@ void Shader::compile()
 
     glDeleteShader(vertShaderID);
     glDeleteShader(fragShaderID);
-
-    std::cout << "Compiled shader with ID #" << progID << std::endl;
 
     _id = progID;
 }
@@ -100,6 +95,7 @@ void Shader::compile(const char *vertSourcePointer, const char *fragSourcePointe
     glGetShaderiv(vertShaderID, GL_INFO_LOG_LENGTH, &infoLogLen);
     std::vector<char> vertShaderErrMsgs(infoLogLen);
     glGetShaderInfoLog(vertShaderID, infoLogLen, NULL, &vertShaderErrMsgs[0]);
+    fprintf(stdout, "%s\n", &vertShaderErrMsgs[0]);
 
     // Compile Fragment Shader
     glShaderSource(fragShaderID, 1, &fragSourcePointer , NULL);
@@ -110,9 +106,9 @@ void Shader::compile(const char *vertSourcePointer, const char *fragSourcePointe
     glGetShaderiv(fragShaderID, GL_INFO_LOG_LENGTH, &infoLogLen);
     std::vector<char> fragShaderErrMsgs(infoLogLen);
     glGetShaderInfoLog(fragShaderID, infoLogLen, NULL, &fragShaderErrMsgs[0]);
+    fprintf(stdout, "%s\n", &fragShaderErrMsgs[0]);
 
     // Link the program
-    fprintf(stdout, "Linking program\n");
     GLuint progID = glCreateProgram();
     glAttachShader(progID, vertShaderID);
     glAttachShader(progID, fragShaderID);
@@ -128,6 +124,5 @@ void Shader::compile(const char *vertSourcePointer, const char *fragSourcePointe
     glDeleteShader(vertShaderID);
     glDeleteShader(fragShaderID);
 
-    std::cout << "Compiled shader with ID #" << progID << std::endl;
     _id = progID;
 }

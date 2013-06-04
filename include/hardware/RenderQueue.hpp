@@ -46,15 +46,32 @@ struct RenderInfo
 
 struct RenderObject
 {
-    bool hasTexture;
-    GLuint __vao, bufferStart, length;
-    Mesh *mesh;
-    Shader *shader;
-    Texture *tex;
+    GLuint  __vao, bufferStart, length;
+    Mesh    *mesh;
+    Shader  *shader;
+    std::vector<Texture*> textures;
 
+    /***************************
+     * Default constructor.
+     ***************************/
     RenderObject();
 
+
+    /**************************************************
+     * Constructs the object's vertex array object.
+     **************************************************/
     void constructVAO();
+
+
+    /************************************
+     * Adds a texture to the object.
+     *
+     * @param tex The new texture.
+     ************************************/
+    void addTexture(Texture *tex)
+    {
+        textures.push_back(tex);
+    }
 };
 
 class RenderQueue

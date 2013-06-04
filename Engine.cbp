@@ -34,9 +34,10 @@
 		</Compiler>
 		<Unit filename="include/GL/SOIL.h" />
 		<Unit filename="include/GL/glcorearb.h" />
-		<Unit filename="include/graphics/RenderQueue.hpp" />
-		<Unit filename="include/graphics/Shader.hpp" />
-		<Unit filename="include/graphics/Texture.hpp" />
+		<Unit filename="include/hardware/Mesh.hpp" />
+		<Unit filename="include/hardware/RenderQueue.hpp" />
+		<Unit filename="include/hardware/Shader.hpp" />
+		<Unit filename="include/hardware/Texture.hpp" />
 		<Unit filename="include/math/mat2.hpp" />
 		<Unit filename="include/math/mat3.hpp" />
 		<Unit filename="include/math/vec2.hpp" />
@@ -45,9 +46,10 @@
 		<Unit filename="include/scene/Scene.hpp" />
 		<Unit filename="include/scene/SceneObject.hpp" />
 		<Unit filename="include/setup.hpp" />
-		<Unit filename="src/graphics/RenderQueue.cpp" />
-		<Unit filename="src/graphics/Shader.cpp" />
-		<Unit filename="src/graphics/Texture.cpp" />
+		<Unit filename="src/hardware/Mesh.cpp" />
+		<Unit filename="src/hardware/RenderQueue.cpp" />
+		<Unit filename="src/hardware/Shader.cpp" />
+		<Unit filename="src/hardware/Texture.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/math/mat2.cpp" />
 		<Unit filename="src/math/mat3.cpp" />
