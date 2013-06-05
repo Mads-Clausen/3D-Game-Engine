@@ -80,7 +80,6 @@ void main()                                                 \
     tex.setVertexAttribLocation(1);
     tex.setUniformLocation(&shader, "tex_sampler");
 
-    glGetError();
     RenderObject ro;
         ro.bufferStart = 0;
         ro.length = 6;

@@ -1,6 +1,7 @@
 EXE     = engine
 LIBS    = -lglfw -lGLEW	-lSOIL -lGL
-SOURCE  = src/*.cpp src/math/*.cpp src/scene/*.cpp src/graphics/*.cpp
+SOURCE  = src/*.cpp src/math/*.cpp src/scene/*.cpp src/hardware/*.cpp
+FLAGS   = -std=c++11
 INCLUDE = -I./include/
 
 all:
@@ -12,4 +13,4 @@ debian:
 	test -s /usr/lib/libSOIL.a  || { apt-get install libsoil-dev; }
 
 
-	g++ $(INCLUDE) $(SOURCE) -o $(EXE) $(LIBS)
+	g++ $(FLAGS) $(INCLUDE) $(SOURCE) -o $(EXE) $(LIBS)
