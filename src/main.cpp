@@ -43,10 +43,11 @@ layout(location = 0) in vec3 vertexPosition_modelspace;     \
 layout(location = 1) in vec2 vertexUV;                      \
                                                             \
 out vec2 UV;                                                \
+uniform mat3 rotation;                                      \
                                                             \
 void main()                                                 \
 {                                                           \
-    gl_Position.xyz = vertexPosition_modelspace;            \
+    gl_Position.xyz = vertexPosition_modelspace * rotation; \
     gl_Position.w = 1.0;                                    \
     UV = vertexUV;                                          \
 }",
@@ -61,7 +62,6 @@ void main()                                                 \
 {                                                           \
     color = texture(tex_sampler, UV).rgb;                   \
 }");
-
     Mesh mesh(vertices, 6);
 
     std::vector<GLfloat> UV =
@@ -85,6 +85,13 @@ void main()                                                 \
         ro.length = 6;
         ro.mesh = &mesh;
         ro.shader = &shader;
+
+        ////////////////////////////////////////////////////////////////
+        ////////////////////////////// LOOK HERE
+        math::mat3f rotationMatrix = math::rotationMat3(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
+        ro.rotationMatrix = &rotationMatrix;
+        //////////////////////////////
+        /////////////////////////////////////////////////////////////////
         ro.addTexture(&tex);
 
     ro.constructVAO();
@@ -92,11 +99,15 @@ void main()                                                 \
     RenderQueue queue;
     queue.push(&ro);
 
+    float yRot = 0;
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         queue.render();
+
+        rotationMatrix = math::rotationMat3(yRot += 0.1f, math::vec3f(0.0f, 1.0f, 0.0f));
+        ro.constructVAO();
 
         glfwSwapBuffers();
     } while(glfwGetKey(GLFW_KEY_ESC) != GLFW_PRESS && glfwGetWindowParam(GLFW_OPENED));

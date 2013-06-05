@@ -69,7 +69,7 @@ class Texture
          *
          * @param v The coordinate-set.
          ***************************************/
-        void addUVCoordinate(vec2<GLfloat> v);
+        void addUVCoordinate(math::vec2<GLfloat> v);
 
 
         /*********************************

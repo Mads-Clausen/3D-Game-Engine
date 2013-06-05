@@ -28,7 +28,7 @@ class Scene;
 class SceneObject
 {
     private:
-        mat3f _space;
+        math::mat3f _space;
         Scene *_parent;
 
     public:

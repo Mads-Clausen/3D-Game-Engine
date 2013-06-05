@@ -35,7 +35,7 @@ void Texture::addUVCoordinate(GLfloat x, GLfloat y)
     _uvCoords.push_back(y);
 }
 
-void Texture::addUVCoordinate(vec2<GLfloat> v)
+void Texture::addUVCoordinate(math::vec2<GLfloat> v)
 {
     _uvCoords.push_back(v.x);
     _uvCoords.push_back(v.y);
