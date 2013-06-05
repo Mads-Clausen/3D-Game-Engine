@@ -80,18 +80,14 @@ void main()                                                 \
     tex.setVertexAttribLocation(1);
     tex.setUniformLocation(&shader, "tex_sampler");
 
+    math::mat3f rotationMatrix = math::rotationMat3(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
+
     RenderObject ro;
         ro.bufferStart = 0;
         ro.length = 6;
         ro.mesh = &mesh;
         ro.shader = &shader;
-
-        ////////////////////////////////////////////////////////////////
-        ////////////////////////////// LOOK HERE
-        math::mat3f rotationMatrix = math::rotationMat3(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
         ro.rotationMatrix = &rotationMatrix;
-        //////////////////////////////
-        /////////////////////////////////////////////////////////////////
         ro.addTexture(&tex);
 
     ro.constructVAO();
