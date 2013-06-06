@@ -24,7 +24,7 @@
 #include "hardware/Shader.hpp"
 #include "hardware/Texture.hpp"
 #include "hardware/Mesh.hpp"
-#include "math/mat3.hpp"
+#include "math/mat4.hpp"
 
 enum RenderInfoType
 {
@@ -50,7 +50,7 @@ struct RenderObject
     GLuint  __vao, bufferStart, length;
     Mesh    *mesh;
     Shader  *shader;
-    math::mat3f *rotationMatrix;
+    math::mat4f *rotationMatrix, *projectionMatrix;
     std::vector<Texture*> textures;
 
     /***************************

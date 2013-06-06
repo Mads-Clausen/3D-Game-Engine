@@ -87,7 +87,8 @@ void RenderObject::constructVAO()
         shader->bind();
         mesh->constructVAO(__vao, false);
 
-        glUniformMatrix3fv(glGetUniformLocation(shader->getID(), "rotation"), 9, GL_FALSE, &(*rotationMatrix)[0]);
+        glUniformMatrix4fv(glGetUniformLocation(shader->getID(), "rotation"), 4, GL_FALSE, &(*rotationMatrix)[0]);
+        glUniformMatrix4fv(glGetUniformLocation(shader->getID(), "projection"), 4, GL_FALSE, &(*projectionMatrix)[0]);
 
         for(unsigned int i = 0; i < textures.size(); ++i)
             textures[i]->push();

@@ -25,7 +25,12 @@ namespace math
             _type _mat[9];
 
         public:
-            mat3() {};
+            mat3()
+            {
+                for(unsigned int i = 0; i < 9; ++i)
+                    _mat[i] = 0;
+            };
+
             mat3(vec3<_type> v0, vec3<_type> v1, vec3<_type> v2)
             {
                 _mat[0] = v0.x; _mat[3] = v0.y; _mat[6] = v0.z;
@@ -89,28 +94,28 @@ namespace math
 
             /****************************************************************/
 
-            inline mat3<_type> operator+(vec3<_type> &other)
+            inline mat3<_type> operator+(vec3<_type> other)
             {
                 return mat3<_type>(_mat[0] + other.x, _mat[3] + other.y, _mat[6] + other.z,
                                    _mat[1] + other.x, _mat[4] + other.y, _mat[7] + other.z,
                                    _mat[2] + other.x, _mat[5] + other.y, _mat[8] + other.z);
             }
 
-            inline mat3<_type> operator-(vec3<_type> &other)
+            inline mat3<_type> operator-(vec3<_type> other)
             {
                 return mat3<_type>(_mat[0] - other.x, _mat[3] - other.y, _mat[6] - other.z,
                                    _mat[1] - other.x, _mat[4] - other.y, _mat[7] - other.z,
                                    _mat[2] - other.x, _mat[5] - other.y, _mat[8] - other.z);
             }
 
-            inline mat3<_type> operator*(vec3<_type> &other)
+            inline mat3<_type> operator*(vec3<_type> other)
             {
                 return mat3<_type>(_mat[0] * other.x, _mat[3] * other.y, _mat[6] * other.z,
                                    _mat[1] * other.x, _mat[4] * other.y, _mat[7] * other.z,
                                    _mat[2] * other.x, _mat[5] * other.y, _mat[8] * other.z);
             }
 
-            inline mat3<_type> operator/(vec3<_type> &other)
+            inline mat3<_type> operator/(vec3<_type> other)
             {
                 return mat3<_type>(_mat[0] / other.x, _mat[3] / other.y, _mat[6] / other.z,
                                    _mat[1] / other.x, _mat[4] / other.y, _mat[7] / other.z,
@@ -119,26 +124,22 @@ namespace math
 
             /****************************************************************/
 
-            inline mat3<_type> operator+(mat3<_type> &other)
+            inline mat3<_type> operator+(mat3<_type> other)
             {
                 return mat3<_type>(_mat[0] + other[0], _mat[3] + other[3], _mat[6] + other[6],
                                    _mat[1] + other[1], _mat[4] + other[4], _mat[7] + other[7],
                                    _mat[2] + other[2], _mat[5] + other[5], _mat[8] + other[8]);
             }
 
-            inline mat3<_type> operator-(mat3<_type> &other)
+            inline mat3<_type> operator-(mat3<_type> other)
             {
                 return mat3<_type>(_mat[0] - other[0], _mat[3] - other[3], _mat[6] - other[6],
                                    _mat[1] - other[1], _mat[4] - other[4], _mat[7] - other[7],
                                    _mat[2] - other[2], _mat[5] - other[5], _mat[8] - other[8]);
             }
 
-            inline mat3<_type> operator*(mat3<_type> &other)
+            inline mat3<_type> operator*(mat3<_type> other)
             {
-                /* return mat3<_type>(_mat[0] * other[0] + _mat[1] * other[1] + _mat[2] * other[2], _mat[0] * other[3] + _mat[3] * other[4] + _mat[6] * other[5],  _mat[0] * other[6] + _mat[1] * other[7] + _mat[2] * other[8],
-                                   _mat[1] * other[0] + _mat[2] * other[1] + _mat[3] * other[2], _mat[1] * other[3] + _mat[4] * other[4] + _mat[7] * other[5],  _mat[1] * other[6] + _mat[2] * other[7] + _mat[3] * other[8],
-                                   _mat[2] * other[0] + _mat[3] * other[1] + _mat[4] * other[2], _mat[5] * other[3] + _mat[6] * other[4] + _mat[8] * other[5],  _mat[2] * other[6] + _mat[3] * other[7] + _mat[4] * other[8]); */
-
                 vec3<_type> row1, row2, row3;
                 row1.x = vec3<_type>(_mat[0], _mat[3], _mat[6]).dot(vec3<_type>(other[0], other[1], other[2]));
                 row2.x = vec3<_type>(_mat[1], _mat[4], _mat[7]).dot(vec3<_type>(other[0], other[1], other[2]));
@@ -158,7 +159,7 @@ namespace math
                                    row3.x, row3.y, row3.z);
             }
 
-            inline mat3<_type> operator/(mat3<_type> &other)
+            inline mat3<_type> operator/(mat3<_type> other)
             {
                 return mat3<_type>(_mat[0] / other[0], _mat[3] / other[3], _mat[6] / other[6],
                                    _mat[1] / other[1], _mat[4] / other[4], _mat[7] / other[7],
@@ -167,14 +168,14 @@ namespace math
 
             /****************************************************************/
 
-            inline vec3<_type> vec_multiply(vec3<_type> &other)
+            inline vec3<_type> vec_multiply(vec3<_type> other)
             {
                 return vec3<_type>(_mat[0] * other.x + _mat[3] * other.y + _mat[6] * other.z,
                                    _mat[1] * other.x + _mat[4] * other.y + _mat[7] * other.z,
                                    _mat[2] * other.x + _mat[4] * other.y + _mat[8] * other.z);
             }
 
-            inline vec3<_type> vec_divide(vec3<_type> &other)
+            inline vec3<_type> vec_divide(vec3<_type> other)
             {
                 return vec3<_type>(_mat[0] / other.x + _mat[3] / other.y + _mat[6] / other.z,
                                    _mat[1] / other.x + _mat[4] / other.y + _mat[7] / other.z,

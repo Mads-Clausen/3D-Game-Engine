@@ -40,6 +40,7 @@
 		<Unit filename="include/hardware/Texture.hpp" />
 		<Unit filename="include/math/mat2.hpp" />
 		<Unit filename="include/math/mat3.hpp" />
+		<Unit filename="include/math/mat4.hpp" />
 		<Unit filename="include/math/vec2.hpp" />
 		<Unit filename="include/math/vec3.hpp" />
 		<Unit filename="include/math/vec4.hpp" />
@@ -51,11 +52,8 @@
 		<Unit filename="src/hardware/Shader.cpp" />
 		<Unit filename="src/hardware/Texture.cpp" />
 		<Unit filename="src/main.cpp" />
-		<Unit filename="src/math/mat2.cpp" />
 		<Unit filename="src/math/mat3.cpp" />
-		<Unit filename="src/math/vec2.cpp" />
-		<Unit filename="src/math/vec3.cpp" />
-		<Unit filename="src/math/vec4.cpp" />
+		<Unit filename="src/math/mat4.cpp" />
 		<Unit filename="src/scene/Scene.cpp" />
 		<Unit filename="src/scene/SceneObject.cpp" />
 		<Extensions>

@@ -22,7 +22,12 @@ namespace math
             _type _mat[4];
 
         public:
-            mat2() {};
+            mat2()
+            {
+                for(unsigned int i = 0; i < 4; ++i)
+                    _mat[i] = 0;
+            };
+
             mat2(vec2<_type> v0, vec2<_type> v1, vec2<_type> v2)
             {
                 _mat[0] = v0.x; _mat[3] = v0.y;
@@ -76,25 +81,25 @@ namespace math
 
             /****************************************************************/
 
-            inline mat2<_type> operator+(vec2<_type> &other)
+            inline mat2<_type> operator+(vec2<_type> other)
             {
                 return mat2<_type>(_mat[0] + other.x, _mat[3] + other.y,
                                    _mat[1] + other.x, _mat[4] + other.y);
             }
 
-            inline mat2<_type> operator-(vec2<_type> &other)
+            inline mat2<_type> operator-(vec2<_type> other)
             {
                 return mat2<_type>(_mat[0] - other.x, _mat[3] - other.y,
                                    _mat[1] - other.x, _mat[4] - other.y);
             }
 
-            inline mat2<_type> operator*(vec2<_type> &other)
+            inline mat2<_type> operator*(vec2<_type> other)
             {
                 return mat2<_type>(_mat[0] * other.x, _mat[3] * other.y,
                                    _mat[1] * other.x, _mat[4] * other.y);
             }
 
-            inline mat2<_type> operator/(vec2<_type> &other)
+            inline mat2<_type> operator/(vec2<_type> other)
             {
                 return mat2<_type>(_mat[0] / other.x, _mat[3] / other.y,
                                    _mat[1] / other.x, _mat[4] / other.y);
@@ -102,25 +107,25 @@ namespace math
 
             /****************************************************************/
 
-            inline mat2<_type> operator+(mat2<_type> &other)
+            inline mat2<_type> operator+(mat2<_type> other)
             {
                 return mat2<_type>(_mat[0] + other[0], _mat[3] + other[3],
                                    _mat[1] + other[1], _mat[4] + other[4]);
             }
 
-            inline mat2<_type> operator-(mat2<_type> &other)
+            inline mat2<_type> operator-(mat2<_type> other)
             {
                 return mat2<_type>(_mat[0] - other[0], _mat[3] - other[3],
                                    _mat[1] - other[1], _mat[4] - other[4]);
             }
 
-            inline mat2<_type> operator*(mat2<_type> &other)
+            inline mat2<_type> operator*(mat2<_type> other)
             {
                 return mat2<_type>(_mat[0] * other[0], _mat[3] * other[3],
                                    _mat[1] * other[1], _mat[4] * other[4]);
             }
 
-            inline mat2<_type> operator/(mat2<_type> &other)
+            inline mat2<_type> operator/(mat2<_type> other)
             {
                 return mat2<_type>(_mat[0] / other[0], _mat[3] / other[3],
                                    _mat[1] / other[1], _mat[4] / other[4]);
