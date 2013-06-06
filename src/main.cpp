@@ -29,15 +29,16 @@ int main()
     if(!setup::openWindow("Testing", 600, 600))
         return -1;
 
+    float ps = 0.05f;
     GLfloat vertices[] =
     {
-        -0.3f, -0.3f, -0.0f,
-         0.3f, -0.3f, -0.0f,
-        -0.3f,  0.3f, -0.0f,
+        -ps, -ps, -0.0f,
+         ps, -ps, -0.0f,
+        -ps,  ps, -0.0f,
 
-         0.3f, -0.3f, -0.0f,
-         0.3f,  0.3f, -0.0f,
-        -0.3f,  0.3f, -0.0f
+         ps, -ps, -0.0f,
+         ps,  ps, -0.0f,
+        -ps,  ps, -0.0f
     };
 
     Shader shader("shaders/test.vs", "shaders/test.fs");
@@ -61,7 +62,10 @@ int main()
     tex.setUniformLocation(&shader, "tex_sampler");
 
     math::mat4f rotationMatrix = math::rotationMat4(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
-    math::mat4f perspectiveMatrix = math::perspectiveMat4(-1.0f, 1.0f, 0.2f, 1.0f, -1.0f, 1.0f);
+    math::mat4f perspectiveMatrix = math::perspectiveMat4(  -0.1f, 0.1f,    // left, right
+                                                            0.1f, 0.2f,     // near, far
+                                                            -0.1f, 0.1f     // bottom, top
+                                                        );
     perspectiveMatrix = perspectiveMatrix * 4;
 
     RenderObject ro;
@@ -85,7 +89,7 @@ int main()
 
         queue.render();
 
-        rotationMatrix = math::rotationMat4(yRot += 0.1f, math::vec3f(1.0f, 0.0f, 0.0f));
+        rotationMatrix = math::rotationMat4(yRot += 0.1f, math::vec3f(0.5f, 0.0f, 1.0f));
         ro.constructVAO();
 
         glfwSwapBuffers();
