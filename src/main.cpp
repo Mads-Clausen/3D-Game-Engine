@@ -63,7 +63,7 @@ int main()
 
     math::mat4f rotationMatrix = math::rotationMat4(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
     math::mat4f perspectiveMatrix = math::perspectiveMat4(  -0.1f, 0.1f,    // left, right
-                                                            0.1f, 0.2f,     // near, far
+                                                             0.1f, 0.2f,     // near, far
                                                             -0.1f, 0.1f     // bottom, top
                                                         );
     perspectiveMatrix = perspectiveMatrix * 4;

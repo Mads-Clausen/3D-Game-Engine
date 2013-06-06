@@ -1,0 +1,41 @@
+#!/bin/bash
+
+OPTIONS="-std=c++11"
+LIBS="-lGLEW -lglfw -lGL -lSOIL"
+INCLUDE="-I./include"
+SOURCE="src/*.cpp src/math/*.cpp src/hardware/*.cpp src/scene/*.cpp"
+EXE_DIR="bin/"
+EXE="engine"
+
+if [ "$1" == "clean" ]; then
+	if [ -d $EXE_DIR ]; then echo -e "Deleting \e[31m$EXE_DIR\e[39m" && rm -r $EXE_DIR; fi;
+else
+	GLFW_INSTALLED=$(dpkg --get-selections | awk '/\Winstall/' | grep libglfw-dev)
+	if [ "$GLFW_INSTALLED" == "" ]; then
+		echo "Package 'libglfw-dev' required but not installed."
+	fi
+
+	GLEW_INSTALLED=$(dpkg --get-selections | awk '/\Winstall/' | grep libglew-dev)
+	if [ "$GLEW_INSTALLED" == "" ]; then
+		echo "Package 'libglew-dev' required but not installed."
+	fi
+
+	SOIL_INSTALLED=$(dpkg --get-selections | awk '/\Winstall/' | grep libsoil-dev)
+	if [ "$SOIL_INSTALLED" == "" ]; then
+                echo "Package 'libsoil-dev' required but not installed."
+        fi
+
+	GPP_INSTALLED=$(dpkg --get-selections | awk '/\Winstall/' | grep g++)
+        if [ "$GPP_INSTALLED" == "" ]; then
+                echo "Package 'g++' required but not installed."
+        fi
+
+	if [ "$GLFW_INSTALLED" == "" ] || [ "$GLEW_INSTALLED" == "" ] || [ "$SOIL_INSTALLED" == "" ] || [ "$GPP_INSTALLED" == "" ]; then
+		echo "One or more packages missing. Aborting..."
+		exit
+	fi
+
+	mkdir $EXE_DIR
+	echo "g++ $OPTIONS $LIBS $INCLUDE $SOURCE -o $EXE_DIR$EXE"
+	g++ $OPTIONS $INCLUDE $SOURCE -o "$EXE_DIR$EXE" $LIBS
+fi
