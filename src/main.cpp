@@ -42,13 +42,13 @@ int main()
 
     GLfloat vertices[] =
     {
-        -1.0f, -1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f,
-        -1.0f,  1.0f, 0.0f,
+        -0.7f, -0.7f, 0.0f,
+         0.7f, -0.7f, 0.0f,
+        -0.7f,  0.7f, 0.0f,
 
-         1.0f, -1.0f, 0.0f,
-         1.0f,  1.0f, 0.0f,
-        -1.0f,  1.0f, 0.0f
+         0.7f, -0.7f, 0.0f,
+         0.7f,  0.7f, 0.0f,
+        -0.7f,  0.7f, 0.0f
     };
 
     Shader shader;
@@ -118,7 +118,7 @@ void main()                                                 \
 
         queue.render();
 
-        rotationMatrix = math::rotationMat3(yRot += 0.1f, math::vec3f(1.0f, 0.0f, 0.0f));
+        rotationMatrix = math::rotationMat3(yRot += 0.1f, math::vec3f(0.0f, 1.0f, 0.0f));
         ro.constructVAO();
 
         glfwSwapBuffers();
