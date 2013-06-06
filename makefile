@@ -1,6 +1,6 @@
 EXE     = engine
 LIBS    = -lglfw -lGLEW	-lSOIL -lGL
-SOURCE  = src/*.cpp src/scene/*.cpp src/hardware/*.cpp
+SOURCE  = src/*.cpp src/math/*.cpp src/scene/*.cpp src/hardware/*.cpp
 FLAGS   = -std=c++11
 INCLUDE = -I./include/
 
