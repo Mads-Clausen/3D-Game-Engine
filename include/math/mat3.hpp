@@ -139,9 +139,23 @@ namespace math
                                    _mat[1] * other[0] + _mat[2] * other[1] + _mat[3] * other[2], _mat[1] * other[3] + _mat[4] * other[4] + _mat[7] * other[5],  _mat[1] * other[6] + _mat[2] * other[7] + _mat[3] * other[8],
                                    _mat[2] * other[0] + _mat[3] * other[1] + _mat[4] * other[2], _mat[5] * other[3] + _mat[6] * other[4] + _mat[8] * other[5],  _mat[2] * other[6] + _mat[3] * other[7] + _mat[4] * other[8]); */
 
-                return mat3<_type>(_mat[0] * other[0], _mat[3] * other[3], _mat[6] * other[6],
-                                   _mat[1] * other[1], _mat[4] * other[4], _mat[7] * other[7],
-                                   _mat[2] * other[2], _mat[5] * other[5], _mat[8] * other[8]);
+                vec3<_type> row1, row2, row3;
+                row1.x = vec3<_type>(_mat[0], _mat[3], _mat[6]).dot(vec3<_type>(other[0], other[1], other[2]));
+                row2.x = vec3<_type>(_mat[1], _mat[4], _mat[7]).dot(vec3<_type>(other[0], other[1], other[2]));
+                row3.x = vec3<_type>(_mat[2], _mat[5], _mat[8]).dot(vec3<_type>(other[0], other[1], other[2]));
+
+                row1.y = vec3<_type>(_mat[0], _mat[3], _mat[6]).dot(vec3<_type>(other[3], other[4], other[5]));
+                row2.y = vec3<_type>(_mat[1], _mat[4], _mat[7]).dot(vec3<_type>(other[3], other[4], other[5]));
+                row3.y = vec3<_type>(_mat[2], _mat[5], _mat[8]).dot(vec3<_type>(other[3], other[4], other[5]));
+
+                row1.z = vec3<_type>(_mat[0], _mat[3], _mat[6]).dot(vec3<_type>(other[6], other[7], other[8]));
+                row2.z = vec3<_type>(_mat[1], _mat[4], _mat[7]).dot(vec3<_type>(other[6], other[7], other[8]));
+                row3.z = vec3<_type>(_mat[2], _mat[5], _mat[8]).dot(vec3<_type>(other[6], other[7], other[8]));
+
+
+                return mat3<_type>(row1.x, row1.y, row1.z,
+                                   row2.x, row2.y, row2.z,
+                                   row3.x, row3.y, row3.z);
             }
 
             inline mat3<_type> operator/(mat3<_type> &other)

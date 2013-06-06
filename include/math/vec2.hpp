@@ -62,6 +62,11 @@ namespace math
                 double m = this->magnitude();
                 return vec2<_type>(x / m, y / m);
             }
+
+            inline _type dot(vec2<_type> other)
+            {
+                return x * other.x + y * other.y;
+            }
     };
 
     typedef vec2<float>             vec2f;

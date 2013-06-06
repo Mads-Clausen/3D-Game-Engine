@@ -34,6 +34,6 @@ namespace math
                          sinAz, cosAz, 0,
                          0, 0, 1);
 
-        return rotZ * rotY * rotX;
+        return rotX * rotY * rotZ;
     }
 };

@@ -80,6 +80,11 @@ namespace math
                 double m = this->magnitude();
                 return vec3<_type>(x / m, y / m, z / m);
             }
+
+            inline _type dot(vec3<_type> other)
+            {
+                return x * other.x + y * other.y + z * other.z;
+            }
     };
 
     typedef vec3<float>             vec3f;

@@ -9,6 +9,7 @@
  ******************************************************************/
 
 #include <iostream>
+#include <iomanip>
 
 #include "math/vec3.hpp"
 #include "math/mat3.hpp"
@@ -19,6 +20,20 @@
 
 int main()
 {
+    math::mat3f matrix(1.0f, 0.0f, 2.0f,
+                       0.0f, 1.0f, 4.0f,
+                       0.0f, 0.0f, 1.0f);
+    std::cout << "[" << matrix[0] << std::setw(4) << matrix[3] << std::setw(4) << matrix[6] << "]" << std::endl;
+    std::cout << "[" << matrix[1] << std::setw(4) << matrix[4] << std::setw(4) << matrix[7] << "]" << std::endl;
+    std::cout << "[" << matrix[2] << std::setw(4) << matrix[5] << std::setw(4) << matrix[8] << "]" << std::endl << std::endl;
+    math::mat3f scale(1.0f, 0.0f, 2.0f,
+                      0.0f, 1.0f, 0.0f,
+                      0.0f, 0.0f, 1.0f);
+    matrix = matrix * scale;
+    std::cout << "[" << matrix[0] << std::setw(4) << matrix[3] << std::setw(4) << matrix[6] << "]" << std::endl;
+    std::cout << "[" << matrix[1] << std::setw(4) << matrix[4] << std::setw(4) << matrix[7] << "]" << std::endl;
+    std::cout << "[" << matrix[2] << std::setw(4) << matrix[5] << std::setw(4) << matrix[8] << "]" << std::endl;
+
     if(!setup::initOpenGL())
         return -1;
 
@@ -27,13 +42,13 @@ int main()
 
     GLfloat vertices[] =
     {
-        -1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, 0.0f,
+         1.0f, -1.0f, 0.0f,
+        -1.0f,  1.0f, 0.0f,
 
-         1.0f, -1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f
+         1.0f, -1.0f, 0.0f,
+         1.0f,  1.0f, 0.0f,
+        -1.0f,  1.0f, 0.0f
     };
 
     Shader shader;
@@ -48,6 +63,7 @@ uniform mat3 rotation;                                      \
 void main()                                                 \
 {                                                           \
     gl_Position.xyz = vertexPosition_modelspace * rotation; \
+    gl_Position.z = gl_Position.z - 1.0;                    \
     gl_Position.w = 1.0;                                    \
     UV = vertexUV;                                          \
 }",
@@ -102,7 +118,7 @@ void main()                                                 \
 
         queue.render();
 
-        rotationMatrix = math::rotationMat3(yRot += 0.1f, math::vec3f(0.0f, 1.0f, 0.0f));
+        rotationMatrix = math::rotationMat3(yRot += 0.1f, math::vec3f(1.0f, 0.0f, 0.0f));
         ro.constructVAO();
 
         glfwSwapBuffers();
