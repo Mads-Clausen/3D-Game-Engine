@@ -10,7 +10,7 @@ void main()
 {
     gl_Position = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = rotation * gl_Position;
-    gl_Position.z -= 0.15;
+    gl_Position.z -= 0.5;
     gl_Position = projection * gl_Position;
     UV = vertexUV;
 }

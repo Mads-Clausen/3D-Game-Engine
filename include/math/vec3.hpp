@@ -85,6 +85,13 @@ namespace math
             {
                 return x * other.x + y * other.y + z * other.z;
             }
+
+            inline vec3<_type> cross(vec3<_type> other)
+            {
+                return vec3<_type>(y * other.z - other.y * z,
+                                   z * other.x - other.z * x,
+                                   x * other.y - other.x * y);
+            }
     };
 
     typedef vec3<float>             vec3f;

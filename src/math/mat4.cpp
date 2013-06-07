@@ -49,4 +49,30 @@ namespace math
 
         return mat;
     }
+
+    mat4<float> lookAt(vec3<float> pos, vec3<float> look)
+    {
+        vec3<float> up(0.0f, 1.0f, 0.0f), right;
+
+        vec3<float> dir(look.x - pos.x,
+                        look.y - pos.y,
+                        look.z - pos.z);
+        dir = dir.normal();
+
+        right = dir.cross(up);
+        up = right.cross(dir).normal();
+
+        mat4<float> view(right.x, right.y, right.z, 0.0f,
+                           up.x,    up.y,    up.z, 0.0f,
+                         -dir.x,  -dir.y,  -dir.z, 0.0f,
+                           0.0f,    0.0f,    0.0f, 1.0f);
+        mat4<float> aux;
+        for(unsigned int i = 0; i < 4; ++i) aux[i + i * 4] = 1.0f; // fill diagonal
+
+        aux[12] = -pos.x;
+        aux[13] = -pos.y;
+        aux[14] = -pos.z;
+
+        return view * aux;
+    }
 };

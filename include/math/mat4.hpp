@@ -257,6 +257,17 @@ namespace math
      * @return The projection matrix.
      ************************************************/
     mat4<float> perspectiveMat4(float left, float right, float near, float far, float bottom, float top);
+
+
+    /*************************************************
+     * Generate a 4*4 view matrix.
+     *
+     * @param pos The position of the "camera".
+     * @param look The direction it's looking into.
+     *
+     * @return The view matrix.
+     *************************************************/
+    mat4<float> lookAt(vec3<float> pos, vec3<float> dir);
 };
 
 #endif // MAT4_INCLUDED

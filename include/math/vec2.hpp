@@ -14,6 +14,9 @@
 
 #include <cmath>
 
+#define DEGTORAD 3.14159265359 / 180
+#define RADTODEG 180 / 3.14159265359
+
 namespace math
 {
     template<typename _type>
@@ -66,6 +69,11 @@ namespace math
             inline _type dot(vec2<_type> other)
             {
                 return x * other.x + y * other.y;
+            }
+
+            inline _type angle(vec2<_type> other)
+            {
+                return acos(this->dot(other) / this->magnitude() * other.magnitude()) * RADTODEG;
             }
     };
 
