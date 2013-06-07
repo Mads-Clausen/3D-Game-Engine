@@ -104,8 +104,8 @@ int main()
                                                         0.01f, 10.0f,  // near, far
                                                        -10.0f,   10.0f     // bottom, top
                                                          );
-            viewMatrix = math::lookAt(  math::vec3f(x, y, z), // position
-                                        math::vec3f( 0.0f, 0.0f, -1.0f)  // look direction
+            viewMatrix = math::lookAt(  math::vec3f(x, y, z),           // position
+                                        math::vec3f(0.0f, 0.0f, -1.0f)  // look direction
                                         );
             perspectiveMatrix = perspectiveMatrix * viewMatrix;
             oldX = x;

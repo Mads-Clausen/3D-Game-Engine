@@ -38,4 +38,7 @@ else
 	mkdir $EXE_DIR
 	echo "g++ $OPTIONS $LIBS $INCLUDE $SOURCE -o $EXE_DIR$EXE"
 	g++ $OPTIONS $INCLUDE $SOURCE -o "$EXE_DIR$EXE" $LIBS
+	echo "Copying files..."
+	cp -r shaders $EXE_DIR
+	cp -r test.jpg $EXE_DIR
 fi
