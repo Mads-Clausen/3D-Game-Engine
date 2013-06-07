@@ -1,7 +1,7 @@
-2D-Game-Engine
+3D-Game-Engine
 ==============
 
-A 2D game engine written in C++, using OpenGL 3.2 for graphics.
+A 3D game engine written in C++, using OpenGL 3.2 for graphics.
 
 
 Compilation

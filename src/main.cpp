@@ -65,8 +65,7 @@ int main()
     math::mat4f perspectiveMatrix = math::perspectiveMat4(  -0.1f, 0.1f,    // left, right
                                                              0.075f, 0.225f,     // near, far
                                                             -0.1f, 0.1f     // bottom, top
-                                                        );
-    perspectiveMatrix = perspectiveMatrix * 4;
+                                                         );
 
     RenderObject ro;
         ro.bufferStart = 0;
