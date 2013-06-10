@@ -256,7 +256,7 @@ namespace math
      *
      * @return The projection matrix.
      ************************************************/
-    mat4<float> perspectiveMat4(float left, float right, float near, float far, float bottom, float top);
+    mat4<float> perspectiveMat4(float frustumScale, float aspect, float near, float far);
 
 
     /*************************************************

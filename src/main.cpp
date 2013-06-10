@@ -66,9 +66,8 @@ int main()
     tex.setUniformLocation(&shader, "tex_sampler");
 
     math::mat4f rotationMatrix = math::rotationMat4(0.0f, math::vec3f(0.0f, 0.0f, 0.0f));
-    math::mat4f perspectiveMatrix = math::perspectiveMat4( -1.0f,   1.0f,    // left, right
-                                                            0.01f, 1.0f,  // near, far
-                                                           -1.0f,   1.0f     // bottom, top
+    math::mat4f perspectiveMatrix = math::perspectiveMat4( 1.0f,   1.0f,    // left, right
+                                                            0.1f, 3.0f  // near, far
                                                          );
     math::mat4f viewMatrix = math::lookAt(math::vec3f(-0.0f, 0.0f, -0.39f), // position
                                           math::vec3f( 0.0f, 0.0f, -0.2f)  // look direction
@@ -100,9 +99,8 @@ int main()
 
         if(x != oldX || y != oldY || z != oldZ)
         {
-            perspectiveMatrix = math::perspectiveMat4( -10.0f,   10.0f,    // left, right
-                                                        0.01f, 10.0f,  // near, far
-                                                       -10.0f,   10.0f     // bottom, top
+            perspectiveMatrix = math::perspectiveMat4( 1.0f, 1.0f,    // left, right
+                                                        0.1f, 3.0f  // near, far
                                                          );
             viewMatrix = math::lookAt(  math::vec3f(x, y, z),           // position
                                         math::vec3f(0.0f, 0.0f, -1.0f)  // look direction
@@ -116,14 +114,14 @@ int main()
         ro.constructVAO();
 
         if(glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS)
-            x -= 0.0005f;
+            x -= 0.002f;
         else if(glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS)
-            x += 0.0005f;
+            x += 0.002f;
 
         if(glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS)
-            y += 0.0001f;
+            y += 0.002f;
         else if(glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS)
-            y -= 0.0001f;
+            y -= 0.002f;
 
         if(glfwGetKey(GLFW_KEY_SPACE) == GLFW_PRESS)
             z -= 0.0005f;

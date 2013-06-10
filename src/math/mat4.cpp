@@ -40,12 +40,14 @@ namespace math
         return rotX * rotY * rotZ;
     }
 
-    mat4<float> perspectiveMat4(float left, float right, float near, float far, float bottom, float top)
+    mat4<float> perspectiveMat4(float frustumScale, float aspect, float near, float far)
     {
-        mat4<float> mat(2 * near / (right - left), 0,                         (right + left) / (right - left), 0,
-                        0,                         2 * near / (top - bottom), (top + bottom) / (top - bottom), 0,
-                        0,                         0,                         -(far + near) / (far - near),    (-2 * far * near) / (far - near),
-                        0,                         0,                          -1,                             0);
+        mat4<float> mat(
+                        frustumScale * aspect,      0,                          0,                              0,
+                        0,                          frustumScale,               0,                              0,
+                        0,                          0,                         (far + near) / (near - far),     (2 * far * near) / (near - far),
+                        0,                          0,                         -1,                              0
+                        );
 
         return mat;
     }
@@ -62,10 +64,11 @@ namespace math
         right = dir.cross(up);
         up = right.cross(dir).normal();
 
-        mat4<float> view(right.x, right.y, right.z, 0.0f,
-                           up.x,    up.y,    up.z, 0.0f,
-                         -dir.x,  -dir.y,  -dir.z, 0.0f,
-                           0.0f,    0.0f,    0.0f, 1.0f);
+        mat4<float> view(
+			right.x, right.y, right.z, 0.0f,
+                       	up.x,    up.y,    up.z,	   0.0f,
+                       -dir.x,  -dir.y,  -dir.z,   0.0f,
+                       	 0.0f,    0.0f,    0.0f,   1.0f);
         mat4<float> aux;
         for(unsigned int i = 0; i < 4; ++i) aux[i + i * 4] = 1.0f; // fill diagonal
 
