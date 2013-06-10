@@ -69,6 +69,9 @@ namespace setup
             return false;
         }
 
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
+
         return true;
     }
 

@@ -247,12 +247,10 @@ namespace math
     /************************************************
      * Generate a 4*4 projection matrix.
      *
-     * @param left The left clipping point
-     * @param right The right clipping point.
+     * @param frustumScale The frustum scale
+     * @param aspect The aspect ratio
      * @param near The near clipping point.
      * @param far The far clipping point.
-     * @param bottom The bottom clipping point.
-     * @param top The top clipping point.
      *
      * @return The projection matrix.
      ************************************************/
